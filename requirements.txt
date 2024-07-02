@@ -1,0 +1,7 @@
+python-dotenv
+langchain
+langchain-openai
+langchain-google-genai
+langchain-core
+langchain-community
+openai==0.28
