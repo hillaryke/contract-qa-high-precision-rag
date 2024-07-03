@@ -47,6 +47,7 @@ def extract_qa_pairs_to_df(file_path):
 
         # Create DataFrame
         df = pd.DataFrame({"Question": questions, "Answer": answers})
+        df.columns = ['question', 'ground_truths']
         
         ### Inlude the question numbers to the dataframe
         # df = pd.DataFrame({"Question_Number": question_numbers, "Question": questions, "Answer": answers})

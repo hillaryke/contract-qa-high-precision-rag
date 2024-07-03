@@ -6,7 +6,7 @@ langchain-core
 langchain-community
 openai==0.28
 fastapi
-chroma
+chromadb
 unstructured
 "unstructured[all]"
 coloredlogs

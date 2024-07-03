@@ -83,7 +83,8 @@ def create_rank_fusion_chain(question, llm = None, retriever = None):
     retrieval_chain_rag_fusion = generate_queries | retriever.map() | reciprocal_rank_fusion
     return retrieval_chain_rag_fusion
 
-def get_answer(question, create_chain, retriever = None, llm = None):
+
+def generate_answer(question, context, llm = None):
 
     # RAG
     template = """Answer the following question based on this context:
@@ -95,20 +96,14 @@ def get_answer(question, create_chain, retriever = None, llm = None):
     """
 
     prompt = ChatPromptTemplate.from_template(template)
-    llm = ChatOpenAI(temperature=0)
-    
-    retrieval_chain = create_chain(question, llm, retriever)
-    docs = retrieval_chain.invoke({"question": question})
-
 
     final_rag_chain = (
-        {"context": docs | format_docs_to_text,
-        "question": } 
+        {"context": itemgetter("context"), "question": itemgetter("question")}
         | prompt
         | llm
         | StrOutputParser()
     )
 
-    answer = final_rag_chain.invoke({"question":question})
+    answer = final_rag_chain.invoke({"context":context, "question":question})
     return answer
 
