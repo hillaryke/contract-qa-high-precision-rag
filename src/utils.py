@@ -5,6 +5,11 @@ import pandas as pd
 def format_docs_to_text(docs):
     return "\n\n---\n\n".join(doc.page_content for doc in docs)
 
+# Extract doc from tuple
+def format_tuple_docs_to_text(docs):
+    """ Formats a list of (doc, score) tuples into a text string. """
+    return "\n\n---\n\n".join(doc.page_content for doc, _ in docs)  
+
 def extract_qa_pairs_to_df(file_path):
     """Extracts question-answer pairs from a docx file and saves them to a DataFrame.
 
