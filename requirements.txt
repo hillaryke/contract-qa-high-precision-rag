@@ -10,3 +10,8 @@ chromadb
 unstructured
 "unstructured[all]"
 coloredlogs
+semantic-router
+"semantic-router[processing]"
+langchain_experimental
+cohere
+langchain_cohere
