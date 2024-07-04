@@ -16,7 +16,7 @@ coloredlogs.install(level="INFO", fmt="%(asctime)s - %(name)s - %(levelname)s - 
 CHROMA_PATH = "chroma"
 DATA_PATH = "data/content"
 
-def save_to_chroma(docs: list[Document]):
+def save_to_chroma(docs: list[Document], embeddings = OpenAIEmbeddings()):
     # Clear out the database first.
     logger.info("Clearing out the chroma database.")
     if os.path.exists(CHROMA_PATH):
@@ -24,13 +24,14 @@ def save_to_chroma(docs: list[Document]):
 
     # Create a new DB from the documents.
     logger.info("Creating a new chroma database.")
-    vectorstore = Chroma.from_documents(documents=docs, embedding=OpenAIEmbeddings())
+    vectorstore = Chroma.from_documents(documents=docs, embedding=embeddings,
+                                        persist_directory=CHROMA_PATH)
     return vectorstore
 
 
-def initialize_vectorstore(chunks):
+def initialize_vectorstore(chunks, embeddings = OpenAIEmbeddings()):
     # Save the chunks to the chroma store.
-    vectorstore = save_to_chroma(chunks)
+    vectorstore = save_to_chroma(chunks, embeddings)
     return vectorstore
 
 def get_vectorstore():
