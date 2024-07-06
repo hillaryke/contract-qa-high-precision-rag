@@ -15,13 +15,13 @@ class ChromaStore:
     self.data_path = data_path
     self.embeddings = embeddings if embeddings else OpenAIEmbeddings()
     self.logger = logging.getLogger(__name__)
-    coloredlogs.install(level="INFO", fmt="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+    coloredlogs.install(level="WARNING", fmt="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 
   def save_to_chroma(self, docs):
-    self.logger.info("Clearing out the chroma database.")
+    print("--INFO--", "Clearing out the chroma database.")
     if os.path.exists(self.chroma_path):
       shutil.rmtree(self.chroma_path)
-    self.logger.info("Creating a new chroma database.")
+    print("--INFO--", "Creating a new chroma database.")
     vectorstore = Chroma.from_documents(documents=docs, embedding=self.embeddings,
                       persist_directory=self.chroma_path)
     return vectorstore
@@ -31,7 +31,7 @@ class ChromaStore:
     return vectorstore
 
   def get_vectorstore(self):
-    self.logger.info("Loading the vectorstore from chroma db.")
+    print("--INFO--", "Loading the vectorstore from chroma db.")
     vectorstore = Chroma(persist_directory=self.chroma_path, embedding_function=self.embeddings)
     return vectorstore
 
