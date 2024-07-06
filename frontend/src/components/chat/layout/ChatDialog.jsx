@@ -33,10 +33,11 @@ function CustomizedInputBase() {
                 // log
             }
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const clickHandler = async (e) => {
-        if (message.trim().length == 0)
+        if (message.trim().length === 0)
             return 
         setMessage("")
         sendChatMessageAsync(message)
