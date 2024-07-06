@@ -24,29 +24,29 @@ project_root/
 ```
 
 ## Getting Started
-### 1. Clone this repo
+#### 1. Clone this repo
 ```
 git clone git@github.com:hillaryke/contract-qa-high-precision-rag.git
 cd contract-qa-high-precision-rag
 ```
-### 2. Configure the environment
+#### 2. Configure the environment
 Add your OPENAI_API_KEY to a .env file in the project root directory.
 
 ## Installation
-### 1. Install dependencies
+#### 1. Install dependencies
 ```
 pip install -r requirements.txt
 ```
 
 ## Usage
-### 1. Start the FastAPI server
+#### 1. Start the FastAPI server
 Run the command to start the FastAPI server:
 ```
 make run-server
 ```
 The server will start at http://localhost:8000/
 
-### 2. Start the React frontend
+#### 2. Start the React frontend
 ```
 make run-frontend
 ```
@@ -54,7 +54,7 @@ make run-frontend
 On your browser access the frontend app from http://localhost:3000/
 
 ## Testing
-### 1. Run tests
+#### 1. Run tests
 To run the tests, use the following command:
 ```
 make test
