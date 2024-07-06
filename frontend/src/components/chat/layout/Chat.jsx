@@ -25,7 +25,8 @@ export default function Chat() {
     useEffect(() => {
         clearChatMessages()
         // startChat()
-    }, [clearChatMessages]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
