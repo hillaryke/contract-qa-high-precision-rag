@@ -4,3 +4,9 @@ dev:
 
 play:
 	ls main.py | entr -n -r python main.py
+
+run-frontent:
+	cd frontend && npm run start
+
+run-backend:
+	cd api && uvicorn app.main:app --reload
