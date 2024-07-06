@@ -24,7 +24,7 @@ GENERATOR_TEMPLATE = Settings.GENERATOR_TEMPLATE
 def initialize_rag_pipeline():
     # Load the documents from the data directory.
     # documents = load_documents_from_dir("data/content")
-    chroma_store = ChromaStore(data_path="../data/content")
+    chroma_store = ChromaStore(data_path="data/content")
     documents = chroma_store.load_documents_from_dir()
 
     chunks = chunk_by_recursive_split(documents, chunk_size=400)

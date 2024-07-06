@@ -25,7 +25,6 @@ export default function Chat() {
     useEffect(() => {
         clearChatMessages()
         // startChat()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleDrawerToggle = () => {
