@@ -4,6 +4,7 @@ notebooks/playg/
 node_modules/
 
 chroma
+OAI_CONFIG_LIST
 
 # IDE
 .idea
