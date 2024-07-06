@@ -25,7 +25,7 @@ export default function Chat() {
     useEffect(() => {
         clearChatMessages()
         // startChat()
-    }, []);
+    }, [clearChatMessages]);
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);

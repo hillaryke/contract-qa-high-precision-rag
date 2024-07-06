@@ -2,6 +2,7 @@ data
 notebooks/playg/
 
 chroma
+OAI_CONFIG_LIST
 
 # IDE
 .idea
