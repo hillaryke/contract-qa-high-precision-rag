@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 coloredlogs.install(level="INFO", fmt="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 
-CHROMA_PATH = "chroma"
+CHROMA_PATH = "./chroma"
 DATA_PATH = "data/content"
 
 def save_to_chroma(docs: list[Document], embeddings = OpenAIEmbeddings()):

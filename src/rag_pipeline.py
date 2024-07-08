@@ -6,6 +6,7 @@ from langchain.load import dumps, loads
 from langchain_openai import ChatOpenAI
 from langchain_core.runnables import RunnablePassthrough
 from operator import itemgetter
+from backend.app.misc import Settings
 
 from src.utils import format_docs_to_text
 
@@ -88,33 +89,7 @@ def create_rank_fusion_chain(question, llm = None, retriever = None):
 def generate_answer(question, context, llm = None):
 
     # RAG
-    template = """**Contractual Analysis Assistant**
-
-    **Context:**
-
-    {context}
-
-    **Previous Q&A Examples:**
-
-    *   **Q:** Who owns the Intellectual Property (IP)?
-        *   **A:** According to Section 4 of the Undertaking (Appendix A), any Work Product, upon creation, shall be fully and exclusively owned by the Company.
-    *   **Q:** Is there a non-compete obligation for the Advisor?
-        *   **A:** Yes, during the term of engagement with the Company and for a period of 12 months thereafter.
-    *   **Q:** Can the Advisor charge for meal time?
-        *   **A:** No. Section 6.1 specifies that billable hours do not include meals or travel time.
-
-    **Your Task:**
-
-    Based on the provided context and the above examples, please provide a concise and legally sound answer to the following question:
-
-    **Question:** {question}
-
-    **Important Considerations:**
-
-    *   Cite specific sections or clauses of the contract whenever possible.
-    *   If the answer is not explicitly stated in the contract, provide a reasoned interpretation based on the available information.
-    *   If the question is ambiguous or requires additional information, clearly state the ambiguity or request clarification.
-    """
+    template = Settings.GENERATOR_TEMPLATE
 
     prompt = ChatPromptTemplate.from_template(template)
 
