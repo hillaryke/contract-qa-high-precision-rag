@@ -5,8 +5,12 @@ dev:
 play:
 	ls main.py | entr -n -r python main.py
 
-run-frontent:
-	cd frontend && npm run start
+run-frontend:
+	cd frontend && npm run dev
 
 run-backend:
-	cd api && uvicorn app.main:app --reload
+	cd backend/app && uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
+install:
+	cd backend && pip install -r requirements.txt
+	cd frontend && npm install

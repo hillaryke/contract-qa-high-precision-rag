@@ -3,6 +3,7 @@ notebooks/playg/
 
 node_modules/
 
+tmp
 chroma
 OAI_CONFIG_LIST
 

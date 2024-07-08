@@ -10,6 +10,13 @@ def format_tuple_docs_to_text(docs):
     """ Formats a list of (doc, score) tuples into a text string. """
     return "\n\n------------\n\n".join(doc.page_content for doc, _ in docs)  
 
+def pretty_print_docs(docs):
+    print(
+        f"\n{'-' * 100}\n".join(
+            [f"Document {i+1}:\n\n" + d.page_content for i, d in enumerate(docs)]
+        )
+    )
+
 def extract_qa_pairs_to_df(file_path):
     """Extracts question-answer pairs from a docx file and saves them to a DataFrame.
 
