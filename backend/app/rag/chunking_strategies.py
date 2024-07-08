@@ -20,9 +20,5 @@ def chunk_by_recursive_split(documents: list[Document], chunk_size: int = 400):
     )
     chunks = text_splitter.split_documents(documents)
     print("--CHUNKING--", f"Split {len(documents)} documents into {len(chunks)} chunks.")
-
-    # document = chunks[10]
-    # print(document.page_content)
-    # print(document.metadata)
-
+    
     return chunks

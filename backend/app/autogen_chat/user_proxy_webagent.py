@@ -7,7 +7,9 @@ except ImportError:
     def colored(x, *args, **kwargs):
         return x
 
-class UserProxyWebAgent(autogen.UserProxyAgent):
+from autogen.agentchat.contrib.retrieve_user_proxy_agent import RetrieveUserProxyAgent
+
+class UserProxyWebAgent(RetrieveUserProxyAgent):
     def __init__(self, *args, **kwargs):
         super(UserProxyWebAgent, self).__init__(*args, **kwargs)
         self._reply_func_list = []

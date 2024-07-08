@@ -58,7 +58,6 @@ def initialize_rag_pipeline():
     qa = RetrievalQA.from_chain_type(
         llm=llm,
         chain_type="stuff",
-        # retriever=compression_retriever,
         retriever=retriever,
         return_source_documents=True,
         verbose=False,
