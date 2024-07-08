@@ -23,7 +23,7 @@ export default function Navigator(props) {
         <Drawer variant="permanent" {...other}>
             <List disablePadding>
                 <ListItem sx={{ ...item, ...itemCategory, fontSize: 22, color: '#fff' }}>
-                Autogen Chat
+                Contract Advisor
                 </ListItem>
             </List>
         </Drawer>
