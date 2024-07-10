@@ -1,6 +1,9 @@
 import autogen
 from autogen import Agent, ConversableAgent
 from typing import Any, Callable, Dict, List, Optional, Tuple, Type, Union
+import asyncio
+import logging
+
 try:
     from termcolor import colored
 except ImportError:
@@ -129,12 +132,19 @@ class UserProxyWebAgent(autogen.UserProxyAgent):
         Returns:
             str: The human input or 'exit' if the conversation is to be terminated.
         """
-        last_message = self.last_message()
-        if last_message["content"]:
-            await self.client_receive_queue.put(last_message["content"])
-            reply = await self.client_sent_queue.get()
-            if reply and reply == "DO_FINISH":
-                return "exit"
-            return reply
-        else:
-            return
+        try:
+            last_message = self.last_message()
+            if last_message and last_message.get("content"):
+                await self.client_receive_queue.put(last_message["content"])
+                reply = await self.client_sent_queue.get()
+                if reply and reply == "DO_FINISH":
+                    return "exit"
+                return reply
+            else:
+                return ""
+        except asyncio.QueueEmpty:
+            logging.error("Queue is empty, failed to get human input.")
+            return "exit"
+        except Exception as e:
+            logging.error(f"Unexpected error in a_get_human_input: {e}")
+            return "exit"
