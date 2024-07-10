@@ -10,6 +10,7 @@ from ragas.metrics import (
 )
 
 from src.utils import extract_qa_pairs_to_df, format_tuple_docs_to_text, format_docs_to_text
+# from backend.app.rag.rag_utils import generate_answer
 from src.rag_pipeline import generate_answer
 
 def evaluate_metrics(dataset):
