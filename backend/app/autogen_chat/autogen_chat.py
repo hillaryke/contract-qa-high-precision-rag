@@ -4,6 +4,7 @@ import asyncio
 from collections import defaultdict
 import datetime
 from rag.rag_pipeline import initialize_rag_pipeline, query_rag_pipeline
+import logging
 
 timer_array = []
 
@@ -67,19 +68,38 @@ class AutogenChat():
         # add the queues to communicate 
         self.user_proxy.set_queues(self.client_sent_queue, self.client_receive_queue)
         
-        # initialize the RAG pipeline
-        self.rag_chain = initialize_rag_pipeline()
+        try:
+            # initialize the RAG pipeline
+            self.rag_chain = initialize_rag_pipeline()
+        except Exception as e:
+            logging.error(f"Failed to initialize RAG pipeline: {e}")
+            self.rag_chain = None
 
     async def start(self, message):
-        await self.user_proxy.a_initiate_chat(
-            self.assistant,
-            clear_history=True,
-            message=message
-        )
-        
-    def execute_rag_query(self, rag_query):
-        print("--EXECUTING_RAG-- RAG QUERY")
-        print("--INFO-- MESSAGE", rag_query)
+        if not self.rag_chain:
+            logging.error("RAG pipeline not initialized. Cannot start chat.")
+            return
 
-        answer = query_rag_pipeline(self.rag_chain, rag_query)
-        return answer + " TERMINATE"
+        try:
+            await self.user_proxy.a_initiate_chat(
+                self.assistant,
+                clear_history=True,
+                message=message
+            )
+        except Exception as e:
+            logging.error(f"Failed to initiate chat: {e}")
+
+    def execute_rag_query(self, rag_query):
+        if not self.rag_chain:
+            logging.error("RAG pipeline not initialized. Cannot execute query.")
+            return "Error: RAG pipeline not available."
+
+        try:
+            print("--EXECUTING_RAG-- RAG QUERY")
+            print("--INFO-- MESSAGE", rag_query)
+
+            answer = query_rag_pipeline(self.rag_chain, rag_query)
+            return answer + " TERMINATE"
+        except Exception as e:
+            logging.error(f"Failed to execute RAG query: {e}")
+            return "Error: Failed to execute RAG query."
