@@ -48,6 +48,7 @@ virtual legal assistant.
 
 ```
 project_root/
+├── .github/         # GitHub Actions workflows
 ├── frontend/        # React frontend code
 ├── backend/         # FastAPI backend code
 ├── src/             # Source code for RAG pipeline, utils, etc.
